@@ -1,0 +1,13 @@
+server:
+  port: 9092
+  servlet:
+    context-path: /api_template/v1
+management:
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /
