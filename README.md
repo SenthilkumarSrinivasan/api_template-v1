@@ -12,6 +12,7 @@ Sample application for REST APIs
         
         OR 
         
+        ./gradlew clean build
         java -Dspring.profiles.active=default -jar build/libs/api_template-v1-0.0.1-SNAPSHOT.jar
         
-
+3) Log files can be located in the directory - /logs
