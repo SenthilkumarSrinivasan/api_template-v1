@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/api_template-v1.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/archive/api_template-v1.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.hibernate" level="INFO" >
+        <appender-ref ref="FILE"/>
+    </logger>
+    <springProfile name="default">
+        <logger name="com.ft.template" level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+    </springProfile>
+    <springProfile name="dev,stage,prod">
+        <logger name="com.ft.template" level="INFO">
+            <appender-ref ref="FILE"/>
+        </logger>
+    </springProfile>
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

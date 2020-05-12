@@ -11,3 +11,12 @@ management:
   endpoints:
     web:
       base-path: /
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: localImages
+app:
+  config:
+    sampleFlag: true
