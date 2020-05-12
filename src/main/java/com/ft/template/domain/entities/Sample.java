@@ -13,4 +13,6 @@ public class Sample {
 
     private String title;
 
+    private String value;
+
 }
