@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -38,13 +39,17 @@ public class PhotoService {
 
     public byte[] formatImage(MultipartFile file) throws IOException {
         log.info("resizePhoto started");
-        byte[] returnArray = file.getBytes();
 
         BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
         BufferedImage resizedImage = getScaledImage(bufferedImage, 400, 400);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         File output = new File("/Users/skumarsrinivasan/SenthilSHome/Codebase/FreshThymes/github/resized66.png");
         ImageIO.write(resizedImage, "png", output);
+        ImageIO.write(resizedImage, "png", byteArrayOutputStream);
+        byteArrayOutputStream.flush();
+        byte[] returnArray = byteArrayOutputStream.toByteArray();
+        byteArrayOutputStream.close();
 
         log.info("resizePhoto ended");
 
@@ -87,12 +92,14 @@ public class PhotoService {
         }
 
 
+        Image tmp = src.getScaledInstance(w, h, Image.SCALE_SMOOTH);
 
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = resizedImg.createGraphics();
         g2.setBackground(Color.WHITE);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.clearRect(0,0,w, h);
-        g2.drawImage(src, (w-new_width)/2, (h-new_height)/2, new_width, new_height, null);
+        g2.drawImage(tmp, (w-new_width)/2, (h-new_height)/2, new_width, new_height, null);
         g2.dispose();
         return resizedImg;
     }
