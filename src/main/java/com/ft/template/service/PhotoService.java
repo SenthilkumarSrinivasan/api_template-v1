@@ -92,7 +92,7 @@ public class PhotoService {
         Graphics2D g2 = resizedImg.createGraphics();
         g2.setBackground(Color.WHITE);
         g2.clearRect(0,0,w, h);
-        g2.drawImage(src, (w-new_width)/2, 0, new_width, new_height, null);
+        g2.drawImage(src, (w-new_width)/2, (h-new_height)/2, new_width, new_height, null);
         g2.dispose();
         return resizedImg;
     }
