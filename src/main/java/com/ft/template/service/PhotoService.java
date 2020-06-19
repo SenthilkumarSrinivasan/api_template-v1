@@ -41,7 +41,7 @@ public class PhotoService {
         log.info("resizePhoto started");
 
         BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-        BufferedImage resizedImage = getScaledImage(bufferedImage, 400, 400);
+        BufferedImage resizedImage = getScaledImage(bufferedImage, 600, 600);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         File output = new File("/Users/skumarsrinivasan/SenthilSHome/Codebase/FreshThymes/github/resized66.png");
