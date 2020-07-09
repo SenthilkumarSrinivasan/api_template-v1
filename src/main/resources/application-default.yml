@@ -21,4 +21,4 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: springboot-mongo
+      database: localImages
